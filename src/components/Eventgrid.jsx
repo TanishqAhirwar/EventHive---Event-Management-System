@@ -1,50 +1,61 @@
-import React from "react";
 import EventCard from "./EventCard";
+import { upcomingEvents, availableEvents, ongoingEvents } from "../utils/eventsdata";
+import { Link } from "react-router-dom";
 
-const eventsData = [
-  {
-    id: 1,
-    title: "Tech Innovators Conference 2025",
-    date: "May 10, 2025",
-    time: "10:00 AM",
-    location: "Hyderabad Convention Center",
-    description:
-      "A full-day event featuring industry leaders in AI, IoT, and software development. Network and learn about the future of tech.",
-    image: "/images/techconference.jpg",
-  },
-  {
-    id: 2,
-    title: "Eco Fest - Green Living Expo",
-    date: "June 5, 2025",
-    time: "11:00 AM",
-    location: "Bangalore Green Plaza",
-    description:
-      "Celebrate sustainability with workshops, eco-product vendors, and expert talks on green living. Fun for all ages!",
-    image: "/images/Ecofest.jpg",
-  },
-  {
-    id: 3,
-    title: "Music Mania 2025",
-    date: "April 25, 2025",
-    time: "6:00 PM",
-    location: "Mumbai Open Grounds",
-    description:
-      "Get ready for an electrifying evening with top DJs, food stalls, and thousands of music lovers vibing under the stars.",
-    image: "/images/Musicmania.jpg",
-  },
-];
-
-export default function EventsGrid() {
+export default function EventsGrid({ showAll }) {
   return (
-    <div className="py-10 bg-black px-4">
-      <h2 className="text-3xl font-bold text-green-400 text-center mb-8">
-        🔥 Upcoming Events
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-        {eventsData.map((event) => (
-          <EventCard key={event.id} event={event} />
-        ))}
-      </div>
+    <div className="py-10 bg-black px-4 text-white">
+      {/* Upcoming Events */}
+      <section className="mb-12">
+        <h2 className="text-3xl font-bold text-green-400 text-center mb-8">
+          Upcoming Events
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+          {upcomingEvents.map((event) => (
+            <EventCard key={event.id} event={event} />
+          ))}
+        </div>
+
+        {!showAll && (
+          <div className="text-center mt-14">
+            <Link
+              to="/events"
+              className="inline-block px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
+            >
+              View More Events
+            </Link>
+          </div>
+        )}
+      </section>
+
+      {/* Only render below sections if showAll is true */}
+      {showAll && (
+        <>
+          {/* Available Events */}
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-yellow-400 text-center mb-8">
+              Available Events (Book Now)
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+              {availableEvents.map((event) => (
+                <EventCard key={event.id} event={event} />
+              ))}
+            </div>
+          </section>
+
+          {/* Ongoing Events */}
+          <section>
+            <h2 className="text-3xl font-bold text-red-400 text-center mb-8">
+              Ongoing Events
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+              {ongoingEvents.map((event) => (
+                <EventCard key={event.id} event={event} />
+              ))}
+            </div>
+          </section>
+        </>
+      )}
     </div>
   );
 }

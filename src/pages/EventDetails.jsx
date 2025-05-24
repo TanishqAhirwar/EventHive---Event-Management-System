@@ -1,10 +1,21 @@
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { eventData } from "../utils/eventsdata";
+import { upcomingEvents, availableEvents, ongoingEvents } from "../utils/eventsdata";
+
+// Combine all events into one array
+const allEvents = [...ongoingEvents, ...availableEvents, ...upcomingEvents];
 
 export default function EventDetails() {
   const { id } = useParams();
-  const event = eventData.find((e) => e.id === parseInt(id));
+  const event = allEvents.find((e) => e.id === parseInt(id));
+
+  if (!event) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <h1 className="text-2xl text-red-500 font-bold">Event not found.</h1>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -28,39 +39,12 @@ export default function EventDetails() {
               {event.description}
             </p>
 
-            <div className="bg-white text-black p-4 rounded-lg shadow mb-4">
-              <p className="font-semibold">Total Seats: {event.totalSeats}</p>
-              <p>Booked Seats: {event.attendees}</p>
-              <p>Available: {event.totalSeats - event.attendees}</p>
-            </div>
-
-            {/* <div className="mb-4">
-              <h3 className="text-green-400 font-semibold text-lg mb-1">Speakers</h3>
-              <ul className="list-disc list-inside text-gray-300">
-                {event.speakers.map((speaker, index) => (
-                  <li key={index}>{speaker}</li>
-                ))}
-              </ul>
-            </div> */}
-
-            {/* <div className="mb-4">
-              <h3 className="text-green-400 font-semibold text-lg mb-1">Sponsors</h3>
-              <p className="text-gray-300">{event.sponsors.join(", ")}</p>
-            </div>
-
-            <div className="mb-6">
-              <h3 className="text-green-400 font-semibold text-lg mb-1">Tags</h3>
-              <div className="flex flex-wrap gap-2">
-                {event.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="bg-green-500 text-black text-sm px-3 py-1 rounded-full"
-                  >
-                    #{tag}
-                  </span>
-                ))}
+            {event.availableSlots !== undefined && (
+              <div className="bg-white text-black p-4 rounded-lg shadow mb-4">
+                <p className="font-semibold">Available Slots: {event.availableSlots}</p>
+                <p className="font-semibold">Price: {event.price}</p>
               </div>
-            </div> */}
+            )}
 
             <Link
               to={`/ticketbooking/${event.id}`}

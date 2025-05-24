@@ -10,6 +10,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import EventDetails from "./pages/EventDetails";
 import TicketBooking from "./pages/ticketbooking";
 import ContactPage from "./pages/ContactPage";
+import UserProfile from "./pages/userProfile";
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
       <Route path="/eventdetails/:id" element={<EventDetails />} />
       <Route path="/ticketbooking/:id" element={<TicketBooking />} />
       <Route path="/contactpage" element={<ContactPage />} />
+      <Route path="/profile" element={<UserProfile />} />
+
       </Routes>
   );
 }

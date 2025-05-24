@@ -1,5 +1,3 @@
-import React from "react";
-
 const categoriesData = [
   {
     id: 1,
@@ -50,7 +48,7 @@ export default function Category() {
         {categoriesData.map((category) => (
           <div
             key={category.id}
-            className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105"
+            className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-400 ease-in-out hover:scale-105"
           >
             {/* Image on Top */}
             <img

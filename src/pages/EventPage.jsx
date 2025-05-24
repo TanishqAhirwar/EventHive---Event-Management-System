@@ -1,14 +1,16 @@
 import React from "react";
 import EventCard from "../components/EventCard"; // adjust path if needed
 import Navbar from "../components/Navbar";
-import { eventData } from "../utils/eventsdata";
-
-
+import {
+  upcomingEvents,
+  ongoingEvents,
+  availableEvents,
+} from "../utils/eventsdata";
 
 export default function EventsPage() {
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="min-h-screen bg-black text-white px-6 py-10">
         <div className="flex flex-col md:flex-row gap-10">
           {/* Sidebar Filters */}
@@ -55,14 +57,42 @@ export default function EventsPage() {
 
           {/* Events Listing */}
           <main className="md:w-3/4">
-            <h1 className="text-3xl font-bold mb-6 text-green-400">
+            <h1 className="text-3xl font-bold mb-6 text-green-400 flex justify-center">
               Explore All Events
             </h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {eventData.map((event) => (
-                <EventCard key={event.id} event={event} />
-              ))}
-            </div>
+
+            <section className="mb-8">
+              <h2 className="text-2xl font-semibold text-white mb-4">
+                Ongoing Events
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {ongoingEvents.map((event) => (
+                  <EventCard key={event.id} event={event} />
+                ))}
+              </div>
+            </section>
+
+            <section className="mb-8">
+              <h2 className="text-2xl font-semibold text-white mb-4">
+                Available for Booking
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {availableEvents.map((event) => (
+                  <EventCard key={event.id} event={event} />
+                ))}
+              </div>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-white mb-4">
+                Upcoming Events
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {upcomingEvents.map((event) => (
+                  <EventCard key={event.id} event={event} />
+                ))}
+              </div>
+            </section>
           </main>
         </div>
       </div>

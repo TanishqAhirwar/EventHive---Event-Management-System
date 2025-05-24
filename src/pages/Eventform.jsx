@@ -1,10 +1,9 @@
-import React from "react";
 import Navbar from "../components/Navbar";
 
 export default function Eventform() {
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="min-h-screen bg-black flex items-center justify-center px-4 py-10">
         <div className="w-full max-w-2xl bg-white rounded-xl shadow-lg p-8">
           <h2 className="text-3xl font-bold text-center text-green-500 mb-6">
@@ -62,6 +61,7 @@ export default function Eventform() {
               </div>
             </div>
 
+
             {/* Location */}
             <div>
               <label className="block text-sm font-medium text-black mb-1">
@@ -75,17 +75,33 @@ export default function Eventform() {
               />
             </div>
 
-            {/* Category */}
+            {/* Available Slots */}
             <div>
               <label className="block text-sm font-medium text-black mb-1">
-                Category
+                Available Slots
               </label>
-              <select className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400">
-                <option>Music</option>
-                <option>Technology</option>
-                <option>Art</option>
-                <option>Business</option>
-                <option>Food</option>
+              <input
+                type="number"
+                placeholder="Enter number of slots"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+                required
+              />
+            </div>
+
+            {/* Event Category */}
+            <div>
+              <label className="block text-sm font-medium text-black mb-1">
+                Event Category
+              </label>
+              <select
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+                required
+              >
+                <option value="">Select a category</option>
+                <option value="Conference">Conference</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Seminar">Seminar</option>
+                <option value="Celebration">Celebration</option>
               </select>
             </div>
 

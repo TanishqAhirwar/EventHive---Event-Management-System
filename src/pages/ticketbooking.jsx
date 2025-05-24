@@ -1,10 +1,13 @@
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { eventData } from "../utils/eventsdata";
+import { upcomingEvents, ongoingEvents, availableEvents } from "../utils/eventsdata";
+
+// Merge all event arrays into one
+const allEvents = [...upcomingEvents, ...ongoingEvents, ...availableEvents];
 
 export default function TicketBooking() {
   const { id } = useParams(); // get event ID from URL
-  const event = eventData.find((e) => e.id === parseInt(id));
+  const event = allEvents.find((e) => e.id === parseInt(id));
   console.log("Event ID from URL:", id);
   console.log("Fetched event:", event);
 
@@ -15,9 +18,6 @@ export default function TicketBooking() {
       </div>
     );
   }
-
-  console.log("Event ID from URL:", id);
-  console.log("All events:", event);
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -71,7 +71,7 @@ export default function TicketBooking() {
               <input
                 type="number"
                 min={1}
-                max={10}
+                max={5}
                 className="w-full px-4 py-2 rounded-lg border focus:outline-none"
                 placeholder="1"
               />

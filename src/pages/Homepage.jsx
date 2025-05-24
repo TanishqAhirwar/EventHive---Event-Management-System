@@ -1,4 +1,3 @@
-import React from "react";
 import Category from "../components/category";
 import Eventbylocation from "../components/eventbylocation";
 import EventsGrid from "../components/Eventgrid";
@@ -18,7 +17,8 @@ export default function Homepage() {
         <Navbar />
         <HeroSection />
       </div>
-      <EventsGrid />
+
+      <EventsGrid showAll={false} />
       <Category />
       <Eventbylocation />
       <GallerySection />
